@@ -1,0 +1,12 @@
+*.beam
+*.dump
+log/
+ebin/
+deps/*
+rel/erl-dns
+zones.json
+.eunit/
+db/
+_build/
+rebar.lock
+*.dump
