@@ -1,0 +1,15 @@
+{application, amqp_pubsub, [
+    {description, ""},
+    {vsn, git},
+    {registered, []},
+    {applications, [kernel,
+                    stdlib,
+                    xmerl,
+                    syntax_tools,
+                    recon,
+                    compiler,
+                    rabbit_common,
+                    amqp_client
+    ]},
+    {env, []}
+]}.

@@ -16,7 +16,7 @@
 %%
 %% The meat of the resolution occurs in erldns_resolver:resolve/3
 
--module(erldns_queue).
+-module(amqp_pubsub).
 
 -behaviour(gen_server).
 
@@ -78,7 +78,7 @@ publish(ServerName, AmqpParams, Message)->
     gen_server:cast(ServerName, {publish, AmqpParams, Message}).
 
 init([ServerName]) ->
-    lager:debug("Starting ~p", [ServerName]),
+    io:format("Starting ~p", [ServerName]),
     {ok, Connection} = get_connection(),
     {ok, Channel} = get_channel(Connection),
     State = #state{
@@ -104,7 +104,6 @@ get_channel(Connection) ->
     amqp_connection:open_channel(Connection).
 
 default_callback(RoutingKey, Body) ->
-    file:write_file("foo.txt", io_lib:fwrite("~p.\n", [Body])),
     io:format(" [x] ~p:~p~n", [RoutingKey, Body]),
     {ok, true}.
 
