@@ -32,17 +32,35 @@ You need Erlang Client binaries:
     wget https://www.rabbitmq.com/releases/rabbitmq-erlang-client/v3.6.14/recon-2.3.2.ez
     unzip recon-2.3.2.ez
     ln -s recon-2.3.2 recon
+    
+Custom rabbitmq connection can set up using environment variables
+```erlang
+get_connection() ->
+    amqp_connection:start(#amqp_params_network{
+        host = os:getenv(<<"AMQP_HOST">>, "localhost"),
+        port = list_to_integer(
+            os:getenv(<<"AMQP_PORT">>, "5672")
+        ),
+        username = list_to_binary(os:getenv(<<"AMQP_USERNAME">>, "guest")),
+        password = list_to_binary(os:getenv(<<"AMQP_PASSWORD">>, "guest")),
+        heartbeat = list_to_integer(
+            os:getenv(<<"AMQP_HEARTBEAT">>, "10")
+        )
+}).
+```
 
 In Erlang Shell
+```erlang
+  c(amqp_pubsub).  
+  rr(amqp_pubsub).
+```
+  
+  Start Consumers default
+  
+```erlang
+  amqp_pubsub:start_link().
 
-  > c(amqp_pubsub).  
-  > rr(amqp_pubsub).
-
-  Start Consumers
-
-  > amqp_pubsub:start_link(consumer0).
-
-  > amqp_pubsub:subscribe(consumer0, #amqp_params{
+  amqp_pubsub:subscribe(#amqp_params{
       exchange_name = <<"exchange_name">>,
       exchange_type = <<"topic">>,
       queue_name = <<"queue_name">>,
@@ -50,12 +68,45 @@ In Erlang Shell
       exchange_durable = true,
       queue_durable = true
   }).
+```
+  
 
-  Publish Messages
+  Start Consumers (Subscribe with custom process name)
 
-  > amqp_pubsub:start_link(publish0).
+```erlang
+  amqp_pubsub:start_link(consumer0).
 
-  > amqp_pubsub:publish(publish0, #amqp_params{
+  amqp_pubsub:subscribe(consumer0, #amqp_params{
+      exchange_name = <<"exchange_name">>,
+      exchange_type = <<"topic">>,
+      queue_name = <<"queue_name">>,
+      routing_key = <<"routing_key">>,
+      exchange_durable = true,
+      queue_durable = true
+  }).
+```
+    
+  Publish Messages default
+  
+```erlang
+  amqp_pubsub:start_link().
+
+  amqp_pubsub:publish(#amqp_params{
+      exchange_name = <<"exchange_name">>,
+      exchange_type = <<"topic">>,
+      queue_name = <<"queue_name">>,
+      routing_key = <<"routing_key">>,
+      exchange_durable = true,
+      queue_durable = true
+  },<<"arun">>). 
+```
+
+  Publish Messages (Subscribe with custom process name)
+
+```erlang
+  amqp_pubsub:start_link(publish0).
+
+  amqp_pubsub:publish(publish0, #amqp_params{
       exchange_name = <<"exchange_name">>,
       exchange_type = <<"topic">>,
       queue_name = <<"queue_name">>,
@@ -63,12 +114,4 @@ In Erlang Shell
       exchange_durable = true,
       queue_durable = true
   },<<"arun">>).
-
-  > amqp_pubsub:publish(publish0, #amqp_params{
-      exchange_name = <<"exchange_name">>,
-      exchange_type = <<"topic">>,
-      queue_name = <<"queue_name">>,
-      routing_key = <<"routing_key">>,
-      exchange_durable = true,
-      queue_durable = true
-  },<<"arun new message">>).
+```
