@@ -104,7 +104,11 @@ In Erlang Shell
   
 ```erlang
   amqp_pubsub:start_link().
+```
 
+    amqp_pubsub:publish(#amqp_params{}, <<"Message To be sent">>).
+
+```
   amqp_pubsub:publish(#amqp_params{
       exchange_name = <<"exchange_name">>,
       exchange_type = <<"topic">>,
@@ -119,7 +123,11 @@ In Erlang Shell
 
 ```erlang
   amqp_pubsub:start_link(publish0).
+```
 
+   amqp_pubsub:publish(publish0, #amqp_params{}, <<"Message To be sent">>).
+   
+```
   amqp_pubsub:publish(publish0, #amqp_params{
       exchange_name = <<"exchange_name">>,
       exchange_type = <<"topic">>,
