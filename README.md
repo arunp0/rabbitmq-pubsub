@@ -33,6 +33,18 @@ You need Erlang Client binaries:
     unzip recon-2.3.2.ez
     ln -s recon-2.3.2 recon
     
+## Build 
+
+```sh
+   
+   git clone https://github.com/arunp0/rabbitmq-pubsub
+   
+   make
+   
+ ```
+ 
+## Usage
+
 Custom rabbitmq connection can set up using environment variables
 ```erlang
 get_connection() ->
