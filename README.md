@@ -105,8 +105,8 @@ In Erlang Shell
 ```erlang
   amqp_pubsub:start_link().
 ```
-
-    amqp_pubsub:publish(#amqp_params{}, <<"Message To be sent">>).
+   
+   amqp_pubsub:publish(#amqp_params{}, <<"Message To be sent">>).
 
 ```
   amqp_pubsub:publish(#amqp_params{
