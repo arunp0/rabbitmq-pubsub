@@ -19,19 +19,6 @@ using apt:
 
     sudo apt-get install erlang
 
-You need Erlang Client binaries:
-
-    wget https://www.rabbitmq.com/releases/rabbitmq-erlang-client/v3.6.14/rabbit_common-3.6.14.ez
-    unzip rabbit_common-3.6.14.ez
-    ln -s rabbit_common-3.6.14 rabbit_common
-
-    wget https://www.rabbitmq.com/releases/rabbitmq-erlang-client/v3.6.14/amqp_client-3.6.14.ez
-    unzip amqp_client-3.6.14.ez
-    ln -s amqp_client-3.6.14 amqp_client
-
-    wget https://www.rabbitmq.com/releases/rabbitmq-erlang-client/v3.6.14/recon-2.3.2.ez
-    unzip recon-2.3.2.ez
-    ln -s recon-2.3.2 recon
     
 ## Build 
 
@@ -39,7 +26,7 @@ You need Erlang Client binaries:
    
    git clone https://github.com/arunp0/rabbitmq-pubsub
    
-   make
+   make all
    
  ```
  

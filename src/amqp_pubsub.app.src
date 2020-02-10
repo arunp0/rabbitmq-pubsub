@@ -1,5 +1,5 @@
 {application, amqp_pubsub, [
-    {description, ""},
+    {description, "An Amqp Client"},
     {vsn, git},
     {registered, []},
     {applications, [kernel,
